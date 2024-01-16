@@ -55,7 +55,13 @@ module.exports = {
     GetSingleFormMatchrouter: (req, res) => {
         debugger;
         const MatchId = req.params.MatchId;
-
+        if (MatchId === 'null' || MatchId === 'undefined' || MatchId == null || MatchId == undefined ){
+            return res.status(500).json ({
+                success :0,
+                error:{ Message: "Undefined or null parameter error", Status: 500 }
+            });
+           
+        }
         GetSingleFormservice(MatchId, (err, results) => {
             if (err) {
                 console.log(err);
@@ -86,7 +92,7 @@ module.exports = {
 
             if (res) {
                 try {
-                    if (results[0] != [] || results[0] != undefined) {
+                    if (results[0] != undefined && results[0].length != 0) {
                         fs.readdir('./resources/Team_Logos', (err, files) => {
                             if (err)
                                 console.log(err);
@@ -119,7 +125,7 @@ module.exports = {
 
                                                     if (i == results[0].length - 1) {
                                                         try {
-                                                            if (results[1] != [] || results[1] != undefined) {
+                                                            if (results[1] != undefined && results[1].length != 0) {
                                                                 fs.readdir('./resources/Team_Logos', (err, files) => {
                                                                     if (err)
                                                                         console.log(err);
@@ -170,7 +176,12 @@ module.exports = {
                                                             }
                                                         }
                                                         catch (e) {
-                                                            return e;
+                                                            return res.status(500).json({
+                                                                success: 500,
+                                                                TeamList1: results[0],
+                                                                TeamList2: results[1],
+                                                                error:e
+                                                            })
                                                         }
 
                                                     }
@@ -184,17 +195,30 @@ module.exports = {
                             }
                         });
                     }
+                    else{
+                        return res.status(200).json({
+                            success: 200,
+                            TeamList1: results[0],
+                            TeamList2: results[1],
+                        })
+                    }
                 }
                 catch (e) {
-                    return e;
+                    return res.status(500).json({
+                        success: 500,
+                        TeamList1: results[0],
+                        TeamList2: results[1],
+                        error:e
+                    })
                 }
             }
             else {
                 console.log(err);
-                return res.status(200).json({
-                    success: 200,
+                return res.status(500).json({
+                    success: 500,
                     TeamList1: results[0],
                     TeamList2: results[1],
+                    error:err
                 })
             }
 
