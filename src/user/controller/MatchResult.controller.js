@@ -56,13 +56,7 @@ module.exports = {
     GetMatchResultrouter: (req, res) => {
         debugger;
         const ID = req.Match;
-        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
-            return res.status(500).json ({
-                success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
-            });
-           
-        }
+        
         GetAllResultservice(ID, (err, results) => {
             if (err) {
                 console.log(err);

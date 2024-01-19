@@ -1,24 +1,61 @@
-const {getID} = require("./Loginuser.service");
+const {getID,verifyOTP} = require("./Loginuser.service");
+
 const jwt = require('jsonwebtoken');
+require("dotenv").config()
+
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.System,
+        pass: 'jzwtgmeudabvgzpm'
+    }
+});
+
+function sendEmail(userEmail, sub, otp) {
+	if (!userEmail) {
+        console.error('Recipient email is missing.');
+        return false;
+    }
+    const mailOptions = {
+        from: `<${process.env.System}>`,
+        to: userEmail,
+        subject: `Lexel X OTP`,
+        html: `     <h1 style="color:gray;">Hi :   ${sub}  </h1></br> <hr>
+		            <h2>Your OTP is : ${otp}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error(error);
+            return false; 
+        }
+        console.log("Email sent: %s", info.messageId);
+        return true; 
+    });
+}
+
+
 var otp='';
 module.exports ={
 
     verifyToken:(req,res)=>{
 		const body = req.body;
-		console.log(body,"id")
-			try { 
-				if(body.otp='1234')
+				try { 
+				if(body.otp >0)
 				{
-					getID(body.ID,(err,results) => {
+					verifyOTP(body.ID,body.otp,(err,results) => {
 						if(err){
 							console.log(err);
 							return res.status(500).json ({
 								success :0,
-								message:"DB conn error"
+								message:err
 							});
 						}
-						console.log(results[0][0])
-						if(results[0][0]!={} && results[0][0]!=undefined && results[0][0]!=null ){
+						if(body.otp ==results[0][0].OTP){
 						let jwtSecretKey = process.env.JWT_SECRET_KEY; 
 						
 						 let data = { 
@@ -28,8 +65,6 @@ module.exports ={
 						userID:results[0][0].UserID
 						 } 
 						 const token = jwt.sign(data, jwtSecretKey); 
-						 otp='';
-						 otp=results[0][0].OTP;
 
 						return res.status(200).json({
 							success :200,
@@ -41,14 +76,14 @@ module.exports ={
 						else{
 							return res.status(200).json({
 								success :201,
-								token : ''});
+								Message : 'Invalid OTP.'});
 						}
 					})
 				}
 				else{
-					return res.status(200).json({
+					return res.status(500).json({
 						success :201,
-						token : "Invalid User cardential"
+						Message : "Invalid OTP"
 					});
 			   } 
 			}
@@ -69,7 +104,7 @@ module.exports ={
 				});
 			}
 	
-			if(results[0][0]!={} && results[0][0]!=undefined && results[0][0]!=null ){
+			if(results[0][0]!={} && results[0][0]!=undefined && results[0][0]!=null && results[0][0].OTP!='' && results[0][0].OTP !=undefined){
 			let jwtSecretKey = process.env.JWT_SECRET_KEY; 
 		     let data = { 
 			time: Date(), 
@@ -81,22 +116,22 @@ module.exports ={
 			 const token = jwt.sign(data, jwtSecretKey); 
 			 otp='';
 			 otp=results[0][0].OTP;
+			
+			 sendEmail(body.ID, results[0][0].FullName, results[0][0].OTP);
 			return res.status(200).json({
 				success :200,
-				token : 'OTP send sucessfully.'
+				message : 'OTP send sucessfully.'
 			});
-				
+			
 			}
 			else{
 				return res.status(200).json({
 					success :201,
-					token : "Invalid User cardential"
+					message : "Invalid User cardential"
 				});
 		}
 		});
 		
-		
-	
 		  
 	},
 	

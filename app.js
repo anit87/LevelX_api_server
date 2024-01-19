@@ -42,6 +42,8 @@ const latestMatchRouter = require("./src/user/Router/latestMatch.router");
 const PlayerAttributeDetail=require("./src/user/Router/PlayerAttributeDetail.Router")
 const PlayerAttribute=require("./src/user/Router/getPlayerAttribute.router")
 const MatchFinish=require("./src/user/Router/MetchFinish.router")
+const partyrouter=require("./src/user/Router/party.router")
+const huddlerouter=require("./src/user/Router/huddleToken.router")
 app.use(express.json());
 app.use(cors());
 app.use(upload());
@@ -68,6 +70,8 @@ app.use("/src/latestMatch",latestMatchRouter);
 app.use("/src/getPlayerAttribute",PlayerAttribute);
 app.use("/src/PlayerAttributeDetail",PlayerAttributeDetail);
 app.use("/src/MatchFinish",MatchFinish);
+app.use("/src/party",partyrouter);
+app.use("/src/huddleToken",huddlerouter);
 const initializeSocketIO = (io) => {
     return io.on("connection", async (socket) => {
         try {
@@ -92,7 +96,7 @@ socket.on('chat message private', (data) => {
             if (error) {
                 io.emit('chat message private', data.Message, false);
             } else {
-                io.emit('chat message private', data.Message, true);
+                io.emit('chat message private', data.Message, true,results[0][0].ChatId);
             }
         }
     );
@@ -104,7 +108,7 @@ socket.on('chat message private', (data) => {
                     [
                         0,
                         data.MatchID,
-                        user.userID,
+                        data.UserID,
                         data.Message
                     ],
                     (error, results, fields) => {
@@ -115,6 +119,7 @@ socket.on('chat message private', (data) => {
                         return results
                     }
                 );
+				console.log("User connected. userId: ", user.userID.toString(), " ", user);
                 io.emit('chat message', data.Message );
             });
 

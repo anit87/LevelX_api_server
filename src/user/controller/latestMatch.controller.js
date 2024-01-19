@@ -34,7 +34,7 @@ module.exports ={
                            item.TournamentLogo = '/Tournament_Logo/'+files[idx];
                         }
                         else{
-                      item.TournamentLogo ='No Image.'
+                      item.TournamentLogo = null
                            }
       
                         if(i==results[0].length-1){
@@ -51,13 +51,13 @@ module.exports ={
                                        item.Team1Logo = '/Team_Logos/'+files[idx1];
                                     }
                                     else{
-                                  item.Team1Logo ='No Image.'
+                                  item.Team1Logo =null
                                     }
                                     if( idx2!=-1){
                                         item.Team2Logo = '/Team_Logos/'+files[idx2];
                                      }
                                      else{
-                                   item.Team2Logo ='No Image.'
+                                   item.Team2Logo =null
                                      }
                                     if(i==results[0].length-1){
                                          return res.json({

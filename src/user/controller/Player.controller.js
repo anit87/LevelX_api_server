@@ -158,6 +158,7 @@ module.exports = {
 
     },
     deletePlayer: (req, res) => {
+     const ID = req.params.ID;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
             return res.status(500).json ({
                 success :0,
@@ -165,7 +166,7 @@ module.exports = {
             });
            
         }
-        const ID = req.params.ID;
+        
         deleteTeamId(ID, (err, results) => {
             if (err) {
                 console.log(err);
