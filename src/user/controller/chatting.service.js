@@ -1,29 +1,30 @@
 const pool = require("../../../config/database")
 module.exports={
     create:(data,callBack) =>{
-        console.log("list data",data)
+        //console.log("list data",data)
         if( ( data.ChatID == null ||
-            data.MatchID == null ||
-            data.UserID == null ||
+            data.Sender == null ||
+            data.Receiver == null ||
             data.Message == null 
+            
            
             ) || 
             ( data.ChatID == undefined ||
-                data.MatchID == undefined ||
-                data.UserID == undefined ||
+                data.Sender == undefined ||
+                data.Receiver == undefined ||
                 data.Message == undefined 
-             )  )
+                 )  )
         {
-            return callBack({Message:"Undefined or null parameter error.",Status:201})
+            return callBack({Message:"Undefined or null parameter error",Status:201})
         }
         try {
             var s;
             pool.query(
-                'CALL save_MatchChat(?, ?, ?, ?)',
+                'CALL save_PrivateChat(?, ?, ?, ?)',
                 [
                     data.ChatID ,
-                    data.MatchID ,
-                    data.UserID ,
+                    data.Sender ,
+                    data.Receiver ,
                     data.Message            
                 ],
                 (error, results, fields) => {
@@ -65,13 +66,12 @@ module.exports={
         );
     },
     getByID:(ID,callBack) =>{
-        let id ="'"+ID+"'";
-	try{
-
-        pool.query(`call getByID_MatchChat(?)`,
-        [id],
+        
+        pool.query(`call getBy_ChatID(?)`,
+        [ID],
         (error,results,fields)=>{
-            
+            try{
+
             
             if(error){
                 callBack(error);
@@ -79,23 +79,21 @@ module.exports={
             }
         
             return callBack(null,results)
-        
         }
-
-        );
-	}
         catch(e){
             
             return null;
         }
+        }
+
+        );
     },
-    deleteId:(ID,callBack) =>{
-        let id ="'"+ID+"'";
-	try{
-        pool.query(`call Delete_Message(`+id+`)`,
+    deleteTeamId:(ID,callBack) =>{
+        
+        pool.query(`call Delete_Message(`+ID+`)`,
         [],
         (error,results,fields)=>{
-            
+            try{
 
             
             if(error){
@@ -104,15 +102,14 @@ module.exports={
             }
         
             return callBack(null,results)
-       
         }
-
-        );
- 	}
         catch(e){
             
             return  callBack(e);
         }
+        }
+
+        );
     }
 
    

@@ -4,9 +4,8 @@ const pool = require("../../../config/database")
 module.exports = {
     create: (data, callBack) => {
         if ((data.TeamID == null || data.TeamName == null || data.ShortName == null || data.CountryId == null || data.CreatedBy == null || data.UpdatedBy == null) ||
-            (data.TeamID == undefined || data.TeamName == undefined || data.ShortName == undefined || data.CountryId == undefined || data.CreatedBy == undefined || data.UpdatedBy == undefined)
-            || (data.TeamName.trim() == '' || data.ShortName.trim() == '')) {
-            return callBack({ Message: "Undefined or null or blank parameter error Team.", Status: 201 })
+            (data.TeamID == undefined || data.TeamName == undefined || data.ShortName == undefined || data.CountryId == undefined || data.CreatedBy == undefined || data.UpdatedBy == undefined)) {
+            return callBack({ Message: "Undefined or null parameter error Team.", Status: 201 })
         }
         try {
             var s, m;
@@ -48,12 +47,8 @@ module.exports = {
         }
     },
     getByID: (ID, callBack) => {
-        if (ID == null || ID == undefined){
-            return callBack({ Message: "Undefined or null parameter error", Status: 201 })
-                    }
         try {
-		let id ="'"+ID+"'";
-            pool.query(`call getBy_TeamID(` + id + `)`,
+            pool.query(`call getBy_TeamID(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 
@@ -72,12 +67,9 @@ module.exports = {
         }
     },
     deleteTeamId: (ID, callBack) => {
-        if (ID == null || ID == undefined){
-            return callBack({ Message: "Undefined or null parameter error", Status: 201 })
-                    }
         try {
-		let id ="'"+ID+"'";
-            pool.query(`call Delete_Team(` + id + `)`,
+
+            pool.query(`call Delete_Team(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 

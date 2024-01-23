@@ -4,9 +4,6 @@ const pool = require("../../../config/database")
 module.exports={
 
     getAll:(data,callBack) =>{
-        if (data.columnValue == null || data.columnValue == undefined ||data.userID == null || data.userID == undefined ){
-            return callBack({ Message: "Undefined or null parameter error", Status: 201 })
-                    }
         try {
             const query = `CALL search_Friends('${data.columnValue}','${data.userID}')`;
             pool.query(query, (error, results, fields) => {
@@ -16,7 +13,7 @@ module.exports={
                 return callBack(null, results);
             });
         } catch (e) {
-            console.error("Error executing stored procedure: ", e);
+            console.error("Error executing stored procedure:", e);
             return callBack(null,e);
         }
     }

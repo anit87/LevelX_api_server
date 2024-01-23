@@ -13,9 +13,7 @@ async function RunSql(query) {
 };
 module.exports = {
     SaveUpdatePlayerAttributeDetailService: (data, callBack) => {
-        if ((data.PlayerID == undefined ||  data.AttributeID == undefined || data.AttributeValue == undefined || data.CreatedBy == undefined || data.UpdatedBy == undefined)
-           || data.PlayerID == undefined || data.AttributeID == null || data.AttributeValue == null || data.CreatedBy == null || data.UpdatedBy == null) 
-        {return callBack({error:"Perameter null or undefined error."}); }
+        if (data.PlayerID == undefined || data.PlayerDetailGuid == undefined || data.AttributeID == undefined || data.AttributeValue == undefined || data.CreatedBy == undefined || data.UpdatedBy == undefined) { }
         var s, m;
         pool.query(`call saveUpdate_PlayerAttribute(?,?,?,?,?,?,@?,@?)`,
             [
@@ -48,12 +46,9 @@ module.exports = {
     },
 
     GetAllPlayerAttributeDetailservice: (ID, callBack) => {
-        if (ID == null || ID == undefined) {
-            return callBack({ error: "Perameter null or undefined error." });
-        }
         try {
-	let id ="'"+ID+"'";
-            pool.query(`call get_forUpdatePlayerDetail(` + id + `)`,
+
+            pool.query(`call get_forUpdatePlayerDetail(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 
@@ -75,12 +70,8 @@ module.exports = {
         }
     },
     GetSingleservice: (ID, callBack) => {
-        if (ID == null || ID == undefined) {
-            return callBack({ error: "Perameter null or undefined error." });
-        }
         try {
-	let id ="'"+ID+"'";
-            pool.query(`call getBy_PlayerDetailID(` + id + `)`,
+            pool.query(`call getBy_PlayerDetailID(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 
@@ -103,12 +94,8 @@ module.exports = {
 
 
     DeletePlayerAttributeDetailService: (ID, callBack) => {
-        if (ID == null || ID == undefined) {
-            return callBack({ error: "Perameter null or undefined error." });
-        }
         try {
-	let id ="'"+ID+"'";
-            pool.query(`call Delete_PlayerAttributeDetail(` + id + `)`,
+            pool.query(`call Delete_PlayerAttributeDetail(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 

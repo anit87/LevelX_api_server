@@ -4,17 +4,20 @@ const pool = require("../../../config/database")
 module.exports = {
 
     getAll: (data, callBack) => {
+        if (data.id == undefined || data.id == null) {
+            return callBack({ Message: 'Undefined or null ID.' })
+        }
         try {
-            pool.query(`call getAll_LatestMatches()`,
-                [],
+            pool.query(`call getPlayer_ByTeam(?)`,
+                [data.id],
                 (error, results, fields) => {
 
                     if (error) {
-                        callBack(error);
+                        return callBack(null, error);
 
                     }
-                    console.log("dfdgdfgdf",results[0].length)
-                    return callBack(null, results[0]==[]?[]:results)
+
+                    return callBack(null, results);
 
                 }
 

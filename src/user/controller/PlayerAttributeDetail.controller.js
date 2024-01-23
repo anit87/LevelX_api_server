@@ -55,7 +55,7 @@ module.exports = {
                 return res.json({
                     success: 200,
                     message: "Data Found Succesfully",
-                    PlayerAttributeDetailList: results[0],
+                    PlayerAttributeDetailList:results==null?results:results[0],
                 });
             }
         })
@@ -76,7 +76,7 @@ module.exports = {
                 return res.json({
                     success: 200,
 
-                    PlayerAttributeDetail: results[0]
+                    PlayerAttributeDetail: results==null?results:results[0]
                 });
             }
             else {

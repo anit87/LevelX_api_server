@@ -63,11 +63,10 @@ module.exports={
 
     GetAllResultservice:(data,callBack) =>{
         var s,m;
-            try{
-
         pool.query(`call GetAllMatchResult(@?,@?)`,
         [s,m],
         (error,results,fields)=>{
+            try{
 
             
             if(error){
@@ -77,25 +76,23 @@ module.exports={
         console.log("list",results[0])
        
             return callBack(null,results)
-       
         }
-
-        );
- 	}
         catch(e){
             
             return null;
         }
+        }
+
+        );
     },
 
     GetSingleResultservice:(ResultId,callBack) =>{
-       let id ="'"+ResultId+"'";
-  	try{
-
-        pool.query(`call GetSingleMatchesResult(`+id+`)`,
+       
+        pool.query(`call GetSingleMatchesResult(`+ResultId+`)`,
         [],
         (error,results,fields)=>{
-          
+            try{
+
             
             if(error){
                 callBack(error.message);
@@ -104,27 +101,24 @@ module.exports={
         console.log("SingleMatchResultlist",results[0])
        
             return callBack(null,results)
-        
         }
-
-        );
-	}
         catch(e){
             
             return e.message;
         }
+        }
+
+        );
     },
 
 
 
     DeleteMatchResultService:(ResultId,callBack) =>{
         var s,m;
-	let id ="'"+ResultId+"'";
- 	try{
-        pool.query(`call DeleteMatchResult(`+id+`)`,
+        pool.query(`call DeleteMatchResult(`+ResultId+`)`,
         [],
         (error,results,fields)=>{
-           
+            try{
 
             
             if(error){
@@ -133,15 +127,14 @@ module.exports={
             }
         
             return callBack(null,results)
-        
         }
-
-        );
-	}
         catch(e){
             
             return null;
         }
+        }
+
+        );
     }
 
 };

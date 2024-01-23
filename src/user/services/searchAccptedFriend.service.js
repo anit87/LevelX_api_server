@@ -4,7 +4,7 @@ const pool = require("../../../config/database")
 module.exports={
 
     getAll:(data,callBack) =>{
-        if(data.columnValue == undefined ||data.userID == undefined){
+        if(data.columnValue == null || data.columnValue == undefined ||data.userID == null || data.userID == undefined ){
             return callBack({error:"Perameter undefined error."});
         }
         try {

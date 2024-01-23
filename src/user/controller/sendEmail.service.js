@@ -1,5 +1,9 @@
 require("dotenv").config()
 const nodemailer = require("nodemailer");
+const hbs = require('nodemailer-express-handlebars')
+const path = require('path')
+
+
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -11,14 +15,23 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-transporter.use('compile')
+const handlebarOptions = {
+    viewEngine: {
+        partialsDir: path.resolve('./views/'),
+        defaultLayout: false,
+    },
+    viewPath: path.resolve('./views/'),
+};
+
+// use a template file with nodemailer
+transporter.use('compile', hbs(handlebarOptions))
 
 async function sendEmail(userEmail, sub, otp) {
     const info = await transporter.sendMail({
         from: `<${'bwsgurdeepsingh2022@gmail.com'}>`,
         to: userEmail,
         subject: sub,
-    
+        //template: 'resetPasswordTemplate', // the name of the template file i.e email.handlebars
         context: {
             otp
         }
@@ -28,25 +41,5 @@ async function sendEmail(userEmail, sub, otp) {
         return true
     }
 }
-module.exports = {
 
-    send: (userEmail, sub, otp,callBack) => {
-        
-        try {
-            sendEmail(userEmail, sub, otp);
-            return res.status(200).json({
-				success :200,
-				message : 'OTP send sucessfully.'
-			});
-        }
-
-        catch (e) {
-            return callBack(null, e)
-        }
-    },
-
-
-};
-
-
-
+module.exports = { sendEmail }

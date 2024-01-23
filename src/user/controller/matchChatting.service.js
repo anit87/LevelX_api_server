@@ -65,13 +65,12 @@ module.exports={
         );
     },
     getByID:(ID,callBack) =>{
-        let id ="'"+ID+"'";
-	try{
-
+        
         pool.query(`call getByID_MatchChat(?)`,
-        [id],
+        [ID],
         (error,results,fields)=>{
-            
+            try{
+
             
             if(error){
                 callBack(error);
@@ -79,23 +78,21 @@ module.exports={
             }
         
             return callBack(null,results)
-        
         }
-
-        );
-	}
         catch(e){
             
             return null;
         }
+        }
+
+        );
     },
     deleteId:(ID,callBack) =>{
-        let id ="'"+ID+"'";
-	try{
-        pool.query(`call Delete_Message(`+id+`)`,
+        
+        pool.query(`call Delete_Message(`+ID+`)`,
         [],
         (error,results,fields)=>{
-            
+            try{
 
             
             if(error){
@@ -104,15 +101,14 @@ module.exports={
             }
         
             return callBack(null,results)
-       
         }
-
-        );
- 	}
         catch(e){
             
             return  callBack(e);
         }
+        }
+
+        );
     }
 
    

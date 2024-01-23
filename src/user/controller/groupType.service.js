@@ -5,16 +5,14 @@ module.exports = {
 
     getAll: (data, callBack) => {
         try {
-            pool.query(`call getAll_LatestMatches()`,
+            pool.query(`call getAll_GroupType()`,
                 [],
                 (error, results, fields) => {
-
                     if (error) {
-                        callBack(error);
+                        return callBack(null, results)
 
                     }
-                    console.log("dfdgdfgdf",results[0].length)
-                    return callBack(null, results[0]==[]?[]:results)
+                    return callBack(null, results)
 
                 }
 
@@ -25,6 +23,4 @@ module.exports = {
             return callBack(null, e);
         }
     },
-
-
 };

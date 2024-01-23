@@ -25,8 +25,7 @@ module.exports = {
                 data.AmountOfRounds == undefined ||
                 data.Participants == undefined ||
                 data.CreatedBy == undefined ||
-                data.UpdatedBy == undefined)
-                ||(data.TournamentName.trim() == '')) {
+                data.UpdatedBy == undefined)) {
             return callBack({ Message: "Undefined or null parameter error", Status: 201 })
         }
         try {
@@ -86,10 +85,12 @@ module.exports = {
         }
     },
     getByID: (ID, callBack) => {
-        
- 	 let id ="'"+ID+"'";
+if (ID == null||ID == undefined){
+return callBack({ Message: "Undefined or null parameter error", Status: 201 })
+		}
+
         try {
-            pool.query(`call getBy_TournamentID(` + id + `)`,
+            pool.query(`call getBy_TournamentID(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 
@@ -107,15 +108,13 @@ module.exports = {
 
             return callBack(e);
         }
-    
     },
     deleteTourId: (ID, callBack) => {
-        if (ID == null || ID == undefined){
-            return callBack({ Message: "Undefined or null parameter error", Status: 201 })
-                    }
+if (ID == null||ID == undefined){
+return callBack({ Message: "Undefined or null parameter error", Status: 201 })
+		}
         try {
-	     let id ="'"+ID+"'";
-            pool.query(`call Delete_Tournament(` + id + `)`,
+            pool.query(`call Delete_Tournament(` + ID + `)`,
                 [],
                 (error, results, fields) => {
 

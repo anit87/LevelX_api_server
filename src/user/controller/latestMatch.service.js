@@ -13,8 +13,7 @@ module.exports = {
                         callBack(error);
 
                     }
-                    console.log("dfdgdfgdf",results[0].length)
-                    return callBack(null, results[0]==[]?[]:results)
+                    return callBack(null, results)
 
                 }
 

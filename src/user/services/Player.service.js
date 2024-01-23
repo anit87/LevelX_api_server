@@ -1,28 +1,30 @@
 const pool = require("../../../config/database")
 
 
-module.exports={
-    create:(data,callBack) =>{
+module.exports = {
+    create: (data, callBack) => {
         //console.log("list data",data)
-        if( ( data.PlayerID == null ||
+        if ((data.PlayerID == null ||
             data.FirstName == null ||
             data.LastName == null ||
             data.NickName == null ||
             data.CountryId == null ||
             data.TeamID == null ||
             data.CreatedBy == null ||
-            data.UpdatedBy  == null
-            ) || 
-            ( data.PlayerID == undefined ||
+            data.UpdatedBy == null
+        ) ||
+            (data.PlayerID == undefined ||
                 data.FirstName == undefined ||
                 data.LastName == undefined ||
                 data.NickName == undefined ||
                 data.CountryId == undefined ||
                 data.TeamID == undefined ||
                 data.CreatedBy == undefined ||
-                data.UpdatedBy == undefined)  )
-        {
-            return callBack({Message:"Undefined or null parameter error",Status:201})
+                data.UpdatedBy == undefined) || 
+                ( data.FirstName.trim() == '' ||
+                    data.LastName.trim() == '' ||
+                    data.NickName.trim() == '')) {
+            return callBack({ Message: "Undefined or null or blank space parameter error", Status: 201 })
         }
         try {
             var s, m;
@@ -44,7 +46,7 @@ module.exports={
                     if (error) {
                         return callBack(error);
                     }
-                    
+
                     return callBack(null, results);
                 }
             );
@@ -54,76 +56,86 @@ module.exports={
             return callBack(err);
         }
     },
-    get:(data,callBack) =>{
-       
-        pool.query(`call getAll_Player()`,
-        [],
-        (error,results,fields)=>{
-            try{
+    get: (data, callBack) => {
+        try {
+            pool.query(`call getAll_Player()`,
+                [],
+                (error, results, fields) => {
 
-            
-            if(error){
-                callBack(error);
 
-            }
-       // console.log("list",results[0])
-       
-            return callBack(null,results)
+
+                    if (error) {
+                        callBack(error);
+
+                    }
+                    // console.log("list",results[0])
+
+                    return callBack(null, results)
+
+                }
+
+            );
         }
-        catch(e){
-            
+        catch (e) {
+
             return null;
         }
-        }
-
-        );
     },
-    getByID:(ID,callBack) =>{
-        
-        pool.query(`call getBy_PlayerID(`+ID+`)`,
-        [],
-        (error,results,fields)=>{
-            try{
-
-            
-            if(error){
-                callBack(error);
-
-            }
-        
-            return callBack(null,results)
+    getByID: (ID, callBack) => {
+        if (ID == null || ID == undefined) {
+            return callBack({ error: "Perameter null or undefined error." });
         }
-        catch(e){
-            
-            return null;
-        }
-        }
+        try {
+	     let id ="'"+ID+"'";
+            pool.query(`call getBy_PlayerID(` + id + `)`,
+                [],
+                (error, results, fields) => {
 
-        );
+
+                    if (error) {
+                        callBack(error);
+
+                    }
+
+                    return callBack(null, results)
+
+                }
+
+            );
+        }
+        catch (e) {
+
+            return callBack(e);
+        }
     },
-    deleteTeamId:(ID,callBack) =>{
-        
-        pool.query(`call Delete_Player(`+ID+`)`,
-        [],
-        (error,results,fields)=>{
-            try{
-
-            
-            if(error){
-                callBack(error);
-
-            }
-        
-            return callBack(null,results)
+    deleteTeamId: (ID, callBack) => {
+        if (ID == null || ID == undefined) {
+            return callBack({ error: "Perameter null or undefined error." });
         }
-        catch(e){
-            
-            return null;
-        }
-        }
+        try {
+		let id ="'"+ID+"'";
+            pool.query(`call Delete_Player(` + id + `)`,
+                [],
+                (error, results, fields) => {
 
-        );
+
+
+                    if (error) {
+                        callBack(error);
+
+                    }
+
+                    return callBack(null, results)
+                }
+
+
+            );
+        }
+        catch (e) {
+
+            return callBack(e);
+        }
     }
 
-   
+
 };

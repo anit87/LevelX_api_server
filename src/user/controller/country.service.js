@@ -5,16 +5,15 @@ module.exports = {
 
     getAll: (data, callBack) => {
         try {
-            pool.query(`call getAll_LatestMatches()`,
+            pool.query(`call getAll_Country()`,
                 [],
                 (error, results, fields) => {
 
                     if (error) {
-                        callBack(error);
+                        return callBack(null,error);
 
                     }
-                    console.log("dfdgdfgdf",results[0].length)
-                    return callBack(null, results[0]==[]?[]:results)
+                     return callBack(null, results)
 
                 }
 
@@ -22,7 +21,7 @@ module.exports = {
         }
         catch (e) {
 
-            return callBack(null, e);
+            return callBack(null,e);
         }
     },
 

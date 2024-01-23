@@ -159,6 +159,7 @@ getByID:(req,res)=>{
 },
 deleteTeam:(req,res)=>{
     const ID = req.params.ID;
+	console.log('Team ----------------------', ID)
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
         return res.status(500).json ({
             success :0,
