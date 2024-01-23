@@ -74,7 +74,7 @@ module.exports ={
 							
 						}
 						else{
-							return res.status(200).json({
+							return res.status(500).json({
 								success :201,
 								Message : 'Invalid OTP.'});
 						}
@@ -104,7 +104,7 @@ module.exports ={
 				});
 			}
 	
-			if(results[0][0]!={} && results[0][0]!=undefined && results[0][0]!=null && results[0][0].OTP!='' && results[0][0].OTP !=undefined){
+			if(results[0][0]!={} && results[0][0]!=undefined && results[0][0]!=null && results[0][0].OTP !=undefined &&  results[0][0].OTP !=''){
 			let jwtSecretKey = process.env.JWT_SECRET_KEY; 
 		     let data = { 
 			time: Date(), 
@@ -116,7 +116,6 @@ module.exports ={
 			 const token = jwt.sign(data, jwtSecretKey); 
 			 otp='';
 			 otp=results[0][0].OTP;
-			
 			 sendEmail(body.ID, results[0][0].FullName, results[0][0].OTP);
 			return res.status(200).json({
 				success :200,
