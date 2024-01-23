@@ -116,10 +116,10 @@ module.exports={
 
     DeleteMatchService:(MatchId,callBack) =>{
         var s,m;
-	var id = "'"+p_MatchId+"'"
+	var id = "'"+MatchId+"'"
 	 try{
 
-        pool.query(`call deleteMatches(`+MatchId+`)`,
+        pool.query(`call deleteMatches(`+id+`)`,
         [],
         (error,results,fields)=>{
            
