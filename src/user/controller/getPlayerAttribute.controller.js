@@ -45,13 +45,13 @@ module.exports = {
                                 item.Player1Logo = '/Player_images/' + files[idx1];
                             }
                             else {
-                                item.Team1Logo = 'No Image.'
+                                item.Player1Logo  = 'No Image.'
                             }
                             if (idx2 != -1) {
                                 item.Player2Logo = '/Player_images/' + files[idx2];
                             }
                             else {
-                                item.Team2Logo = 'No Image.'
+                                item.Player2Logo  = 'No Image.'
                             }
                             if (i == results[0].length - 1) {
                                 return res.json({

@@ -97,7 +97,7 @@ getTeam:(req,res)=>{
 },
 getByID:(req,res)=>{
     const ID = req.params.ID;
-    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
         return res.status(500).json ({
             success :0,
             error:{ Message: "Undefined or null parameter error", Status: 500 }
@@ -159,7 +159,7 @@ getByID:(req,res)=>{
 },
 deleteTeam:(req,res)=>{
     const ID = req.params.ID;
-    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
         return res.status(500).json ({
             success :0,
             error:{ Message: "Undefined or null parameter error", Status: 500 }

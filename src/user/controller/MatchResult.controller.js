@@ -78,7 +78,7 @@ module.exports = {
     GetSingleMatchResultrouter: (req, res) => {
         debugger;
         const ID = req.params.ResultId;
-        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
             return res.status(500).json ({
                 success :0,
                 error:{ Message: "Undefined or null parameter error", Status: 500 }
@@ -108,7 +108,7 @@ module.exports = {
 
     DeleteMatchResultRoute: (req, res) => {
         const ID = req.params.ResultId;
-        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined){
             return res.status(500).json ({
                 success :0,
                 error:{ Message: "Undefined or null parameter error", Status: 500 }

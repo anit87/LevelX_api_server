@@ -106,7 +106,7 @@ getAll:(req,res)=>{
 },
 getByID:(req,res)=>{
     const ID = req.params.ID;
-    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
 
         return res.status(500).json ({
             success :0,
@@ -157,7 +157,7 @@ getByID:(req,res)=>{
 },
 deletePlayer:(req,res)=>{
     const ID = req.params.ID;
-    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
         console.log(ID,'in')
         return res.status(500).json ({
             success :0,

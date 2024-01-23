@@ -36,7 +36,7 @@ module.exports = {
     GetAllPlayerAttributeDetailrouter: (req, res) => {
         debugger;
         const ID = req.params.ID;
-        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
             return res.status(500).json ({
                 success :0,
                 error:{ Message: "Undefined or null parameter error", Status: 500 }
@@ -64,7 +64,7 @@ module.exports = {
     GetSinglePlayerAttributeDetailrouter: (req, res) => {
         debugger;
         const ID = req.params.ID;
-        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || isNaN(ID)){
+        if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
             return res.status(500).json ({
                 success :0,
                 error:{ Message: "Undefined or null parameter error", Status: 500 }
@@ -93,7 +93,7 @@ module.exports = {
 
     DeletePlayerAttributeDetailRoute: (req, res) => {
         const PrivateChatId = req.params.ID;
-        if (PrivateChatId === 'null' || PrivateChatId === 'undefined' || PrivateChatId == null || PrivateChatId == undefined || isNaN(PrivateChatId)){
+        if (PrivateChatId === 'null' || PrivateChatId === 'undefined' || PrivateChatId == null || PrivateChatId == undefined ){
             return res.status(500).json ({
                 success :0,
                 error:{ Message: "Undefined or null parameter error", Status: 500 }
