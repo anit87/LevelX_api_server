@@ -46,4 +46,26 @@ module.exports ={
 
         );
     },
+    AfterOTP:(ID,OTP,callBack) =>{
+        pool.query(`update UserBasic set OTP = 0 where EmailName='${ID}' and OTP = ${OTP}`,
+        [ID,OTP],
+        (error,results,fields)=>{
+            try{
+
+            
+            if(error){
+                callBack(error);
+
+            }
+        
+            return callBack(null,results)
+        }
+        catch(e){
+            
+            return null;
+        }
+        }
+
+        );
+    },
 }

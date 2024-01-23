@@ -1,4 +1,4 @@
-const {getID,verifyOTP} = require("./Loginuser.service");
+const {getID,verifyOTP,AfterOTP} = require("./Loginuser.service");
 
 const jwt = require('jsonwebtoken');
 require("dotenv").config()
@@ -65,6 +65,15 @@ module.exports ={
 						userID:results[0][0].UserID
 						 } 
 						 const token = jwt.sign(data, jwtSecretKey); 
+						 AfterOTP(body.ID,body.otp,(err,results) => {
+							if(err){
+								console.log(err);
+								return res.status(500).json ({
+									success :0,
+									message:"DB conn error"
+								});
+							}
+						});
 
 						return res.status(200).json({
 							success :200,

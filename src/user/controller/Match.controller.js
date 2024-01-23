@@ -90,7 +90,7 @@ module.exports = {
         }
         GetSingleservice(ID, (err, results) => {
 
-            if (res) {
+            if (results) {
                 try {
                     if (results[0] != undefined && results[0].length != 0) {
                         fs.readdir('./resources/Team_Logos', (err, files) => {
@@ -98,6 +98,7 @@ module.exports = {
                                 console.log(err);
                             else {
                                 console.log("\nCurrent directory filenames:");
+                                console.log(results[0]);
                                 results[0].forEach((item, i) => {
                                     const idx = files.findIndex(x => x.split('.')[0] == item.TeamGuid)
                                     if (idx != -1) {
@@ -113,7 +114,7 @@ module.exports = {
                                             if (err)
                                                 console.log(err);
                                             else {
-                                                console.log("\nCurrent directory filenames:");
+                                                console.log("\nCurrent directory filenames:");                                                
                                                 results[0].forEach((item, i) => {
                                                     const idx1 = files.findIndex(x => x.split('.')[0] == item.PlayerGuid);
                                                     if (idx1 != -1) {
@@ -131,6 +132,7 @@ module.exports = {
                                                                         console.log(err);
                                                                     else {
                                                                         console.log("\nCurrent directory filenames:");
+                                                                        console.log(results[1]);
                                                                         results[1].forEach((item, i) => {
                                                                             const idx = files.findIndex(x => x.split('.')[0] == item.TeamGuid)
                                                                             if (idx != -1) {
@@ -154,9 +156,9 @@ module.exports = {
                                                                                             }
                                                                                             else {
                                                                                                 item.PlayerLogo = 'No Image.'
-                                                                                            }
-
+                                                                                            }                                                                                           
                                                                                             if (i == results[1].length - 1) {
+                                                                                                
                                                                                                 return res.status(200).json({
                                                                                                     success: 200,
                                                                                                     TeamList1: results[0],
@@ -173,6 +175,13 @@ module.exports = {
 
                                                                     }
                                                                 });
+                                                            }
+                                                            else{
+                                                                return res.status(200).json({
+                                                                    success: 200,
+                                                                    TeamList1: results[0],
+                                                                    TeamList2: results[1],
+                                                                })
                                                             }
                                                         }
                                                         catch (e) {
