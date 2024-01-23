@@ -74,14 +74,14 @@ module.exports ={
 							
 						}
 						else{
-							return res.status(500).json({
+							return res.status(200).json({
 								success :201,
 								Message : 'Invalid OTP.'});
 						}
 					})
 				}
 				else{
-					return res.status(500).json({
+					return res.status(200).json({
 						success :201,
 						Message : "Invalid OTP"
 					});
