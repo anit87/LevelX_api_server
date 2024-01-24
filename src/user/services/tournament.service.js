@@ -70,7 +70,7 @@ module.exports = {
                 (error, results, fields) => {
 
                     if (error) {
-                        callBack(error);
+                        return callBack(error);
 
                     }
                     
@@ -94,7 +94,7 @@ module.exports = {
                 (error, results, fields) => {
 
                     if (error) {
-                        callBack(error);
+                        return callBack(error);
 
                     }
 
@@ -122,7 +122,7 @@ module.exports = {
 
 
                     if (error) {
-                        callBack(error);
+                        return callBack(error);
 
                     }
 

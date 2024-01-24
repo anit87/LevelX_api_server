@@ -100,9 +100,9 @@ module.exports = {
                 }
             );
         }
-        catch (e) {
+        catch (err) {
 
-            return callBack(null, e);
+            return callBack(err);
         }
     }
 

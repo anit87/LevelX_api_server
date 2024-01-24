@@ -229,9 +229,9 @@ module.exports = {
                 console.log(err);
                 return res.status(500).json({
                     success: 500,
-                    TeamList1: results[0],
-                    TeamList2: results[1],
-                    Teams: results[2],
+                    TeamList1: null,
+                    TeamList2: null,
+                    Teams: null,
                     error:err
                 })
             }

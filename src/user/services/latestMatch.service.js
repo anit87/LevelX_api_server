@@ -10,7 +10,7 @@ module.exports = {
                 (error, results, fields) => {
 
                     if (error) {
-                        callBack(error);
+                        return callBack(error);
 
                     }
                     console.log("dfdgdfgdf",results[0].length)

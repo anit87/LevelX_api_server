@@ -27,7 +27,7 @@ module.exports={
              [],
              (error,results,fields)=>{
                  if(error){
-                     callBack(error);
+                    return callBack(error);
     
                  }
                 
@@ -71,7 +71,7 @@ module.exports={
 
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
         console.log("list",results[0])
@@ -98,7 +98,7 @@ module.exports={
           
             
             if(error){
-                callBack(error.message);
+                return callBack(error.message);
 
             }
         console.log("SingleMatchResultlist",results[0])
@@ -128,7 +128,7 @@ module.exports={
 
             
             if(error){
-                callBack(error);
+                return  callBack(error);
 
             }
         

@@ -23,8 +23,8 @@ module.exports = {
             );
         }
 
-        catch (e) {
-            return callBack(null, e)
+        catch (err) {
+            return callBack(err)
         }
     },
 

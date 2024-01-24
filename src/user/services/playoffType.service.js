@@ -10,7 +10,7 @@ module.exports = {
             (error, results, fields) => {
                 try {
                     if (error) {
-                        callBack(error);
+                        return  callBack(error);
 
                     }
                   

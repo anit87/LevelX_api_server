@@ -23,7 +23,7 @@ module.exports={
                 ],
                 (error, results, fields) => {
                     if (error) {
-                        callBack(error);
+                        return  callBack(error);
                     } else {
                         callBack(null, results);
                     }
@@ -44,7 +44,7 @@ module.exports={
  
              
              if(error){
-                 callBack(error.message);
+                return callBack(error.message);
  
              }
          console.log("Tournamentlist",results[0])
@@ -71,8 +71,7 @@ module.exports={
 
             
             if(error){
-                callBack(error);
-
+                return callBack(error);
             }
         //console.log("list",results[0])
        
@@ -93,12 +92,9 @@ module.exports={
         pool.query(`call GetSingleMatches(`+id+`)`,
         [],
         (error,results,fields)=>{
-           
-
-            
+    
             if(error){
-                callBack(error);
-
+                return callBack(error);
             }
         //console.log("Singlelist",results[0])
        
@@ -108,9 +104,9 @@ module.exports={
 
         );
 	}
-        catch(e){
+        catch(err){
             
-            return e;
+            return err;
         }
     },
 

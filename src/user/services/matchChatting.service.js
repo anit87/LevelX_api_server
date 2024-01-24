@@ -49,7 +49,7 @@ module.exports={
 
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
        // console.log("list",results[0])
@@ -74,7 +74,7 @@ module.exports={
             
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
         
@@ -95,9 +95,7 @@ module.exports={
         pool.query(`call Delete_Message(`+id+`)`,
         [],
         (error,results,fields)=>{
-            
-
-            
+              
             if(error){
                 return   callBack(error);
 

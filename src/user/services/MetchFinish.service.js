@@ -9,7 +9,7 @@ module.exports={
         [data.MatchId,data.TournamentId, data.MatchFinish,data.UpdatedBy],
         (error,results,fields)=>{
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
             
