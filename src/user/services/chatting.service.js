@@ -66,8 +66,8 @@ module.exports = {
         }
         try {
 		 let id ="'"+ID+"'";
-            pool.query(`call getBy_ChatID(?)`,
-                [id],
+            pool.query(`call getBy_ChatID(` + id + `)`,
+                [],
                 (error, results, fields) => {
 
                     if (error) {
