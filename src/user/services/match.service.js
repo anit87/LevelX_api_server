@@ -24,9 +24,9 @@ module.exports={
                 (error, results, fields) => {
                     if (error) {
                         return  callBack(error);
-                    } else {
-                        return callBack(null, results);
-                    }
+                    }  
+                    console.log(results)
+                    return callBack(null, results);
                 }
             );
         } catch (err) {
