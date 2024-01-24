@@ -23,9 +23,9 @@ module.exports = {
                         message: err
                     });
                 }
-                return res.status(results[0].status).json({
-                    success: results[0].status,
-                    message: results[0].message
+                return res.status(200).json({
+                    success: results[0],
+                    message: results[0]
                 });
             });
         }
