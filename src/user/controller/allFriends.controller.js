@@ -23,7 +23,7 @@ module.exports ={
             return res.json({
                 success :200,
                 SentRequest_List : results[0],
-		ReciveRequest_List : results[1]
+		        ReciveRequest_List : results[1]
             });
     	});
 	  
