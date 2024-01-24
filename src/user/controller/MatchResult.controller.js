@@ -8,9 +8,9 @@ module.exports = {
         if (( x.ResultId == undefined||x.MatchId == undefined ||   x.PlayerID == undefined ||  x.TeamId == undefined ||  x.Killed == undefined ||  x.Death == undefined || x.Alive==undefined)
         || (x.ResultId ==  null||x.MatchId ==  null ||   x.PlayerID ==  null ||  x.TeamId ==  null ||  x.Killed ==  null ||  x.Death ==  null || x.Alive== null)) 
           { 
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error in list " + i,x,  Status: 500 }
+                error:{ Message: "Undefined or null parameter error in list " + i,x,  Status: 400 }
             });
         }
             i =i+1;
@@ -79,9 +79,9 @@ module.exports = {
         debugger;
         const ID = req.params.ResultId;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -109,9 +109,9 @@ module.exports = {
     DeleteMatchResultRoute: (req, res) => {
         const ID = req.params.ResultId;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }

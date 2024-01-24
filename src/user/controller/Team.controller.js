@@ -6,9 +6,9 @@ createTeam:(req,res)=>{
     if (( body.TeamID == null ||  body.TeamName == null ||  body.ShortName == null ||  body.CountryId == null ||  body.CreatedBy == null ||  body.UpdatedBy == null) ||
             ( body.TeamID == undefined ||  body.TeamName == undefined ||  body.ShortName == undefined ||  body.CountryId == undefined ||  body.CreatedBy == undefined ||  body.UpdatedBy == undefined)
             || ( body.TeamName.trim() == '' ||  body.ShortName.trim() == '')) {
-                return res.status(500).json ({
+                return res.status(400).json ({
                     success :0,
-                    error:{ Message: "Undefined or null parameter error", Status: 500 }
+                    error:{ Message: "Undefined or null parameter error", Status: 400 }
                 });
         }
     create(body,(err,results) => {
@@ -98,9 +98,9 @@ getTeam:(req,res)=>{
 getByID:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }
@@ -161,9 +161,9 @@ deleteTeam:(req,res)=>{
     const ID = req.params.ID;
 	console.log('Team ----------------------', ID)
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }

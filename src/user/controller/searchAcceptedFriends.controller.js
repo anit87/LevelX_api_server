@@ -7,9 +7,9 @@ module.exports ={
 	 
 		const body = req.body;
         if ( body.columnValue == null ||  body.columnValue == undefined || body.userID == null ||  body.userID == undefined){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }

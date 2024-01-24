@@ -119,9 +119,9 @@ getTour:(req,res)=>{
 getByID:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }
@@ -173,9 +173,9 @@ getByID:(req,res)=>{
 deleteTour:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
     }
     deleteTourId(ID,(err,results) => {

@@ -10,9 +10,9 @@ module.exports = {
         const playerID_2 = req.params.playerID_2;
         if (playerID_1 === 'null' || playerID_1 === 'undefined' || playerID_1 == null || playerID_1 == undefined || playerID_2 === 'null' || playerID_2 === 'undefined' || playerID_2 == null || playerID_2 == undefined) {
 
-            return res.status(500).json({
+            return res.status(400).json({
                 success: 0,
-                error: { Message: "Undefined or null parameter error", Status: 500 }
+                error: { Message: "Undefined or null parameter error", Status: 400 }
             });
 
         }

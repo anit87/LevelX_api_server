@@ -15,9 +15,9 @@ addFriend:(req,res)=>{
         body.FriendStatusType == undefined ||
         body.CreatedBy == undefined ||
         body.UpdatedBy == undefined)) {
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null or empty parameter error", Status: 500 }
+                error:{ Message: "Undefined or null or empty parameter error", Status: 400 }
             });
    }
     create(body,(err,results) => {

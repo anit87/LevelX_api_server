@@ -4,11 +4,11 @@ module.exports ={
 createMessage:(req,res)=>{
     const body = req.body;
     var validateitem =['ChatID','MatchID','UserID','Message'];
-    var check = validateitem.filter(x=>[null,undefined,''].includes(body[x] ))
+    var check = validateitem.filter(x=>[null,undefined].includes(body[x] ))
     if(check.length>0){
-     return res.status(500).json ({
+     return res.status(400).json ({
          success :0,
-         error:{ Message: "Undefined or null parameter error", Status: 500 }
+         error:{ Message: "Undefined or null parameter error", Status: 400 }
      }); 
     }
 
@@ -105,9 +105,9 @@ getAll:(req,res)=>{
 getByID:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }
@@ -155,9 +155,9 @@ getByID:(req,res)=>{
 deleteID:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }

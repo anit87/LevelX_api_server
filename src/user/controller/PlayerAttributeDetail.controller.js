@@ -7,9 +7,9 @@ module.exports = {
         if (( x.PlayerDetailId == undefined||x.PlayerID == undefined ||   x.AttributeId == undefined ||  x.AttributeValue == undefined ||  x.CreatedBy == undefined ||  x.UpdatedBy == undefined)
         || (x.PlayerID == null ||   x.AttributeId == null ||  x.AttributeValue == null ||  x.CreatedBy == null ||  x.UpdatedBy == null)) 
           { 
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error in list " + i,x,  Status: 500 }
+                error:{ Message: "Undefined or null parameter error in list " + i,x,  Status: 400 }
             });
         }
             i =i+1;
@@ -37,9 +37,9 @@ module.exports = {
         debugger;
         const ID = req.params.ID;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -65,9 +65,9 @@ module.exports = {
         debugger;
         const ID = req.params.ID;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -94,9 +94,9 @@ module.exports = {
     DeletePlayerAttributeDetailRoute: (req, res) => {
         const PrivateChatId = req.params.ID;
         if (PrivateChatId === 'null' || PrivateChatId === 'undefined' || PrivateChatId == null || PrivateChatId == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }

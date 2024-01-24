@@ -25,9 +25,9 @@ createUser:(req,res)=>{
                 body.Country == 0 ||
                 body.CountryCode == 0 ||
                 body.Birth.trim() == '' )) {
-                return res.status(500).json ({
+                return res.status(400).json ({
                     success :0,
-                    error:{ Message: "Undefined or null or empty parameter error", Status: 500 }
+                    error:{ Message: "Undefined or null or empty parameter error", Status: 400 }
                 });
    }
     create(body,(err,results) => {
@@ -66,9 +66,9 @@ getUser:(req,res)=>{
 getByID:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || !isNaN(ID)){
-            return res.status(500).json ({
+            return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }
@@ -91,9 +91,9 @@ deleteUser:(req,res)=>{
     const ID = req.params.ID;
     if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
       
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }

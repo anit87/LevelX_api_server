@@ -6,9 +6,9 @@ module.exports = {
         var validateitem =['PlayerID','FirstName','LastName','NickName','CountryId','TeamID','CreatedBy','UpdatedBy'];
        var check = validateitem.filter(x=>[null,undefined,''].includes(body[x] ))
        if(check.length>0){
-        return res.status(500).json ({
+        return res.status(400).json ({
             success :0,
-            error:{ Message: "Undefined or null parameter error", Status: 500 }
+            error:{ Message: "Undefined or null parameter error", Status: 400 }
         }); 
        }
       
@@ -106,9 +106,9 @@ module.exports = {
     getByID: (req, res) => {
         const ID = req.params.ID;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -160,9 +160,9 @@ module.exports = {
     deletePlayer: (req, res) => {
      const ID = req.params.ID;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }

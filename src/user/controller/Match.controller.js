@@ -8,9 +8,9 @@ module.exports = {
         'Camera_4URL'];
         var check = validateitem.filter(x=>[null,undefined,'','null','undefined'].includes(matchList[x] ))
         if(check.length>0){
-         return res.status(500).json ({
+         return res.status(400).json ({
              success :0,
-             error:{ Message: "Undefined or null parameter error", Status: 500 }
+             error:{ Message: "Undefined or null parameter error", Status: 400 }
          }); 
         }
 
@@ -56,9 +56,9 @@ module.exports = {
         debugger;
         const MatchId = req.params.MatchId;
         if (MatchId === 'null' || MatchId === 'undefined' || MatchId == null || MatchId == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -82,9 +82,9 @@ module.exports = {
         debugger;
         const ID = req.params.MatchId;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
@@ -163,6 +163,7 @@ module.exports = {
                                                                                                     success: 200,
                                                                                                     TeamList1: results[0],
                                                                                                     TeamList2: results[1],
+                                                                                                    Teams: results[2][0],
                                                                                                 })
 
                                                                                             }
@@ -181,6 +182,7 @@ module.exports = {
                                                                     success: 200,
                                                                     TeamList1: results[0],
                                                                     TeamList2: results[1],
+                                                                    Teams: results[2][0],
                                                                 })
                                                             }
                                                         }
@@ -189,6 +191,7 @@ module.exports = {
                                                                 success: 500,
                                                                 TeamList1: results[0],
                                                                 TeamList2: results[1],
+                                                                Teams: results[2][0],
                                                                 error:e
                                                             })
                                                         }
@@ -209,6 +212,7 @@ module.exports = {
                             success: 200,
                             TeamList1: results[0],
                             TeamList2: results[1],
+                            Teams: results[2][0],
                         })
                     }
                 }
@@ -227,6 +231,7 @@ module.exports = {
                     success: 500,
                     TeamList1: results[0],
                     TeamList2: results[1],
+                    Teams: results[2],
                     error:err
                 })
             }
@@ -238,9 +243,9 @@ module.exports = {
     DeleteMatchRoute: (req, res) => {
         const ID = req.params.MatchId;
         if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
-            return res.status(500).json ({
+            return res.status(400).json ({
                 success :0,
-                error:{ Message: "Undefined or null parameter error", Status: 500 }
+                error:{ Message: "Undefined or null parameter error", Status: 400 }
             });
            
         }
