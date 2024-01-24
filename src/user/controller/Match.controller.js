@@ -219,8 +219,8 @@ module.exports = {
                 catch (e) {
                     return res.status(500).json({
                         success: 500,
-                        TeamList1: results[0],
-                        TeamList2: results[1],
+                        TeamList1: null,
+                        TeamList2: null,
                         error:e
                     })
                 }
