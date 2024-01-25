@@ -37,27 +37,24 @@ module.exports={
              );
          },
 
-
-
-
-
-
     SaveMatchResultService:async (data,callBack) =>{
-     
-         const data2=JSON.stringify(data);
+        try{
+        const data2=JSON.stringify(data);
         var data1='';
         var i = 0;
         //for await   (i=0;i<data.length;i++)
         for await   (let x of data)
         {
-          
-       
          console.log(util.format("CALL SaveUpdateMatchesResult(%d,%d,%d,%d,%d,%d,%d)", x.ResultId, x.MatchId, x.PlayerID, x.TeamId, x.Killed, x.Death, x.Alive)+"=>ServiceData2");
         await RunSql(util.format("CALL SaveUpdateMatchesResult(%d,%d,%d,%d,%d,%d,%d)", x.ResultId, x.MatchId, x.PlayerID, x.TeamId, x.Killed, x.Death, x.Alive));
    
         }
 
        return callBack(null,{msg:"Successfully updated",status:200});
+    }
+    catch(e){
+        return e;
+    }
     
     },
 
@@ -68,23 +65,17 @@ module.exports={
         pool.query(`call GetAllMatchResult(@?,@?)`,
         [s,m],
         (error,results,fields)=>{
-
-            
             if(error){
                 return callBack(error);
-
             }
-        console.log("list",results[0])
-       
+        //console.log("list",results[0])
             return callBack(null,results)
-       
         }
 
         );
  	}
-        catch(e){
-            
-            return null;
+        catch(e){  
+            return e;
         }
     },
 
@@ -99,9 +90,8 @@ module.exports={
             
             if(error){
                 return callBack(error.message);
-
             }
-        console.log("SingleMatchResultlist",results[0])
+        //console.log("SingleMatchResultlist",results[0])
        
             return callBack(null,results)
         
@@ -114,33 +104,24 @@ module.exports={
             return e.message;
         }
     },
-
-
-
     DeleteMatchResultService:(ResultId,callBack) =>{
         var s,m;
 	let id ="'"+ResultId+"'";
  	try{
         pool.query(`call DeleteMatchResult(`+id+`)`,
         [],
-        (error,results,fields)=>{
-           
-
-            
+        (error,results,fields)=>{ 
             if(error){
                 return  callBack(error);
-
             }
-        
             return callBack(null,results)
-        
         }
 
         );
 	}
         catch(e){
             
-            return null;
+            return e;
         }
     }
 

@@ -1,4 +1,4 @@
-const {create,get,getByID,deleteUserId} = require("../services/userRegester.service");
+const {create,get,getUpdateID,deleteUserId} = require("../services/userRegester.service");
 
 module.exports ={
 createUser:(req,res)=>{
@@ -65,14 +65,14 @@ getUser:(req,res)=>{
 },
 getByID:(req,res)=>{
     const ID = req.params.ID;
-    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined || !isNaN(ID)){
+    if (ID === 'null' || ID === 'undefined' || ID == null || ID == undefined ){
             return res.status(400).json ({
             success :0,
             error:{ Message: "Undefined or null parameter error", Status: 400 }
         });
        
     }
-    getByID(ID,(err,results) => {
+    getUpdateID(ID,(err,results) => {
         if(err){
             console.log(err);
             return res.status(500).json ({

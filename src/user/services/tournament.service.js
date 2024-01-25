@@ -118,22 +118,15 @@ module.exports = {
             pool.query(`call Delete_Tournament(` + id + `)`,
                 [],
                 (error, results, fields) => {
-
-
-
                     if (error) {
                         return callBack(error);
-
                     }
 
                     return callBack(null, results)
-
                 }
-
             );
         }
         catch (e) {
-
             return callBack(e);
         }
     }

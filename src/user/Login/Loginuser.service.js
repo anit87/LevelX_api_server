@@ -47,7 +47,7 @@ module.exports ={
         );
     },
     AfterOTP:(ID,OTP,callBack) =>{
-        pool.query(`update UserBasic set OTP = 0 where EmailName='${ID}' and OTP = ${OTP}`,
+        pool.query(`call resetOtp('${ID}',${OTP})`,
         [ID,OTP],
         (error,results,fields)=>{
             try{

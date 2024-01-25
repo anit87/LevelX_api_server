@@ -105,6 +105,31 @@ module.exports = {
             return callBack(e);
         }
     },
+    getUpdateID: (ID, callBack) => {
+        if (ID == null || ID == undefined) {
+            return callBack({ error: "Perameter null or undefined error." });
+        }
+        try {
+
+            pool.query(`call getUpdate_UserID(?)`,
+                [ID],
+                (error, results, fields) => {
+
+
+                    if (error) {
+                        return callBack(error);
+
+                    }
+
+                    return callBack(null, results)
+                }
+
+            );
+        }
+        catch (e) {
+            return callBack(e);
+        }
+    },
     deleteUserId: (ID, callBack) => {
         if (ID == null || ID == undefined) {
             return callBack({ error: "Perameter null or undefined error." });
