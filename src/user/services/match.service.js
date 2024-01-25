@@ -47,7 +47,7 @@ module.exports={
                 return callBack(error.message);
  
              }
-         console.log("Tournamentlist",results[0])
+        // console.log("Tournamentlist",results[0])
         
              return callBack(null,results)
          
@@ -121,7 +121,7 @@ module.exports={
            
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
         

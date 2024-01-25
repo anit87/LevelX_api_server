@@ -10,7 +10,7 @@ module.exports ={
 
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
         
@@ -32,7 +32,7 @@ module.exports ={
 
             
             if(error){
-                callBack(error);
+                return  callBack(error);
 
             }
         
@@ -54,7 +54,7 @@ module.exports ={
 
             
             if(error){
-                callBack(error);
+                return callBack(error);
 
             }
         
