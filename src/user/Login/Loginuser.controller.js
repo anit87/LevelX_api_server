@@ -146,9 +146,9 @@ module.exports ={
 		// Validate User Here 
 		// Then generate JWT Token 
 		const body = req.body;
-		if(body.ID==undefined && body.Password==undefined && body.ID==null && body.Password==null)
+		if(body.ID == undefined || body.Password==undefined || body.ID==null || body.Password==null)
 		{
-			return res.status(400).send({error:'Parameter error.'});
+			return res.status(400).send({error:'Parameter undefined or null error.'});
 		}
 		try { 
 			if(body.ID=='Test' && body.Password=='1234567')
