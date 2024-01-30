@@ -1,7 +1,7 @@
-const {GernateToken,verifyToken} = require("../Login/Loginuser.controller")
+const {GernateToken,verifyToken,Gernate} = require("../Login/Loginuser.controller")
 const router = require("express").Router();
 router.post("/",GernateToken);
 router.put("/",verifyToken);
-//router.get("/:ID",getByID);
+router.post("/Gernate",Gernate);
 //router.delete("/:ID",deleteTeam);
 module.exports = router;

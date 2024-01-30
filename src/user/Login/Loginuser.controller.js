@@ -142,5 +142,37 @@ module.exports ={
 		
 		  
 	},
+	Gernate : (req, res) => { 
+		// Validate User Here 
+		// Then generate JWT Token 
+		const body = req.body;
+		if(body.ID==undefined && body.Password==undefined && body.ID==null && body.Password==null)
+		{
+			return res.status(400).send({error:'Parameter error.'});
+		}
+		try { 
+			if(body.ID=='Test' && body.Password=='1234567')
+			{
+				let jwtSecretKey =process.env.JWT_SECRET_KEY;
+				let data = { 
+					time: Date(), 
+					userId: body.id, 
+					Name:'Test'
+					 } 
+					 const token = jwt.sign(data, jwtSecretKey); 
+					return res.status(200).json({
+						success :200,
+						token : token,
+					});
+			}
+			else{ 
+			
+				return res.status(401).send({error:'Invalid user.'}); 
+			} 
+		} catch (error) { 
+			// Access Denied 
+			return res.status(401).send(error); 
+		} 
+	},
 	
 }
